@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 25%, #FFB6C1 50%, #FF1493 75%, #FF69B4 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,12 +24,13 @@
 
         /* Animación de corazones flotantes */
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .heart-background {
@@ -46,95 +47,191 @@
             position: absolute;
             font-size: 2rem;
             animation: float 3s ease-in-out infinite;
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 50px;
+        /* SOBRE */
+        .envelope-container {
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            z-index: 1;
+            z-index: 10;
+            cursor: pointer;
             position: relative;
         }
 
-        h1 {
-            color: #e74c3c;
-            font-size: 2.5rem;
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            transition: all 0.6s ease;
+            cursor: pointer;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 70px rgba(255, 27, 147, 0.5);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid rgba(255, 255, 255, 0.2);
+            top: 0;
+            left: 0;
+            transition: all 0.6s ease;
+            animation: flapAnimation 2s ease-in-out infinite;
+        }
+
+        @keyframes flapAnimation {
+            0%, 100% { border-top: 100px solid rgba(255, 255, 255, 0.2); }
+            50% { border-top: 100px solid rgba(255, 255, 255, 0.4); }
+        }
+
+        .envelope.opened .envelope-flap {
+            transform: rotateX(180deg);
+            animation: none;
+        }
+
+        .envelope-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 5;
+        }
+
+        .envelope.opened .envelope-text {
+            opacity: 0;
+        }
+
+        /* CARTA */
+        .letter-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .letter-container.show {
+            display: flex;
+        }
+
+        .letter {
+            width: 90%;
+            max-width: 700px;
+            background: linear-gradient(135deg, #FFF5E1 0%, #FFE4E1 100%);
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: letterPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            border: 3px dashed #FF1493;
+        }
+
+        @keyframes letterPop {
+            0% {
+                transform: scale(0) rotateY(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotateY(0);
+                opacity: 1;
+            }
+        }
+
+        .letter-decoration {
+            font-size: 3rem;
             margin-bottom: 20px;
+            animation: spin 8s linear infinite;
+        }
+
+        .letter h1 {
+            color: #FF1493;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
             animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .message {
-            quiero que sepas que eres la persona más especial en mi vida, por lo mismo te hago esto espero veas lo mucho que te amo y lo especial que eres para mi
+        .letter-message {
             color: #333;
-            font-size: 1.3rem;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            line-height: 1.8;
             margin: 30px 0;
             font-weight: 500;
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(255, 182, 193, 0.1));
+            padding: 25px;
+            border-radius: 10px;
         }
 
-        .question {
-            ¿Quieres ser mi San Valentín? 💕
-            color: #e74c3c;
-            font-size: 1.8rem;
-            margin: 30px 0;
+        .letter-question {
+            color: #C44569;
+            font-size: 2rem;
+            margin: 40px 0;
             font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .buttons-container {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 50px;
             flex-wrap: wrap;
         }
 
         button {
-            padding: 15px 40px;
-            font-size: 1.1rem;
+            padding: 18px 50px;
+            font-size: 1.2rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         #yes-btn {
-            /* ===== CAMBIAR AQUÍ: Color del botón SÍ ===== */
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
             color: white;
-            min-width: 150px;
+            min-width: 180px;
         }
 
         #yes-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.5);
         }
 
         #no-btn {
-            /* ===== CAMBIAR AQUÍ: Color del botón NO ===== */
-            background: #95a5a6;
+            background: linear-gradient(135deg, #FF6347, #FF7F50);
             color: white;
-            min-width: 150px;
+            min-width: 180px;
             position: relative;
         }
 
         #no-btn:hover {
-            background: #7f8c8d;
+            transform: scale(1.05);
         }
 
         .success-message {
@@ -144,19 +241,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 200;
             justify-content: center;
             align-items: center;
         }
 
+        .success-message.show {
+            display: flex;
+        }
+
         .success-box {
-            background: white;
-            padding: 60px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            padding: 80px 60px;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
-            animation: zoomIn 0.5s ease;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+            animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 5px solid #FF1493;
         }
 
         @keyframes zoomIn {
@@ -171,72 +273,83 @@
         }
 
         .success-box h2 {
-            sabia que ivas a decir que sí, pongase bella para ese dia
-            color: #e74c3c;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            color: #FF1493;
+            font-size: 3rem;
+            margin-bottom: 25px;
+            animation: pulse 1s ease-in-out infinite;
         }
 
         .success-box p {
-            color: #555;
-            font-size: 1.2rem;
-            margin: 15px 0;
+            color: #333;
+            font-size: 1.4rem;
+            margin: 20px 0;
+            font-weight: bold;
         }
 
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #e74c3c;
+            width: 12px;
+            height: 12px;
+            background: #FF1493;
             pointer-events: none;
             animation: confetti-fall 3s ease-out forwards;
-            z-index: 999;
+            z-index: 199;
         }
 
         @keyframes confetti-fall {
             to {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(100vh) rotate(720deg);
                 opacity: 0;
             }
         }
 
         .close-btn {
-            background: #95a5a6;
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 15px 40px;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 30px;
             font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .close-btn:hover {
-            background: #7f8c8d;
+            transform: scale(1.1);
         }
 
         /* Responsive */
         @media (max-width: 600px) {
-            .container {
-                padding: 30px;
+            .letter {
+                padding: 40px 25px;
             }
 
-            h1 {
+            .letter h1 {
                 font-size: 2rem;
             }
 
-            .message {
-                font-size: 1.1rem;
+            .letter-message {
+                font-size: 1rem;
             }
 
-            .question {
-                font-size: 1.4rem;
+            .letter-question {
+                font-size: 1.5rem;
             }
 
             button {
-                padding: 12px 30px;
+                padding: 14px 30px;
                 font-size: 1rem;
-                min-width: 120px;
+                min-width: 140px;
+            }
+
+            .success-box {
+                padding: 50px 30px;
+            }
+
+            .success-box h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -245,36 +358,50 @@
     <!-- Corazones de fondo -->
     <div class="heart-background" id="heartBackground"></div>
 
-    <!-- Contenedor principal -->
-    <div class="container">
-        <h1>❤️ Una Pregunta Especial ❤️</h1>
-        
-        <div class="message">
-            <!-- ===== CAMBIAR AQUÍ: Escribe el mensaje personalizado para tu novia ===== -->
-            Desde el primer momento en que te vi, mi corazón supo que eras especial.
-            Cada momento contigo es un regalo increíble, cada risa tuya me hace más feliz.
-            <br><br>
-            Eres la persona más hermosa, no solo por fuera, sino por la maravillosa que eres por dentro.
+    <!-- SOBRE -->
+    <div class="envelope-container">
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-text">📧 Click aquí</div>
         </div>
+    </div>
 
-        <div class="question">
-            <!-- ===== CAMBIAR AQUÍ: La pregunta principal ===== -->
-            ¿Quieres ser mi San Valentín? 💕
-        </div>
+    <!-- CARTA -->
+    <div class="letter-container" id="letterContainer">
+        <div class="letter">
+            <div class="letter-decoration">💌</div>
+            
+            <h1>❤️ Te Amo ❤️</h1>
+            
+            <div class="letter-message">
+                <!-- ===== CAMBIAR AQUÍ: Escribe el mensaje personalizado ===== -->
+                Quiero que sepas que eres la persona más especial en mi vida.
+                Por eso hago esto, para que veas lo mucho que te amo y lo especial que eres para mí.
+                <br><br>
+                Cada momento contigo es un regalo, cada sonrisa tuya ilumina mi día.
+                Eres hermosa por dentro y por fuera, y no puedo dejar de pensar en ti.
+            </div>
 
-        <div class="buttons-container">
-            <button id="yes-btn">Sí ❤️</button>
-            <button id="no-btn">No</button>
+            <div class="letter-question">
+                <!-- ===== CAMBIAR AQUÍ: Tu pregunta especial ===== -->
+                ¿Quieres ser mi San Valentín? 💕
+            </div>
+
+            <div class="buttons-container">
+                <button id="yes-btn">SÍ ❤️</button>
+                <button id="no-btn">No</button>
+            </div>
         </div>
     </div>
 
     <!-- Mensaje de éxito -->
     <div class="success-message" id="successMessage">
         <div class="success-box">
-            <!-- ===== CAMBIAR AQUÍ: Mensaje cuando ella dice SÍ ===== -->
-            <h2>¡Eres la Mejor! 🎉</h2>
-            <p>Acabas de hacer el hombre más feliz del mundo ❤️</p>
-            <p>Te amo mucho, mi San Valentín especial 💕</p>
+            <!-- ===== CAMBIAR AQUÍ: Mensaje cuando dice SÍ ===== -->
+            <h2>¡Sabía que dirías que SÍ! 🎉</h2>
+            <p>¡ACABAS DE HACERME EL HOMBRE MÁS FELIZ! ❤️</p>
+            <p>Te amo muchísimo, mi San Valentín especial 💕</p>
+            <p>Ponte bella para ese día... 😍</p>
             <button class="close-btn" onclick="location.reload()">Cerrar</button>
         </div>
     </div>
