@@ -13,13 +13,21 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 25%, #FFB6C1 50%, #FF1493 75%, #FF69B4 100%);
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFC0E3 20%, #FFD700 40%, #FFB6D9 60%, #FF69B4 80%, #FFC0E3 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Animación de corazones flotantes */
@@ -471,4 +479,5 @@
     </script>
 </body>
 </html>
+
 
