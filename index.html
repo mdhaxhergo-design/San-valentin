@@ -3,248 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>San Valentín - Una Propuesta Especial</title>
+    <title>Feliz San Valentín</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            text-align: center;
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .heart {
-            font-size: 60px;
-            margin-bottom: 20px;
-            animation: heartBeat 1.5s infinite;
-        }
-
-        @keyframes heartBeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
-
-        h1 {
-            color: #e74c3c;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .greeting {
-            font-size: 1.8em;
-            color: #333;
-            margin: 30px 0;
-            line-height: 1.6;
-        }
-
-        mark {
-            background-color: #ffffcc;
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 2px dashed #ff6b9d;
-            font-weight: bold;
-            color: #c0392b;
-        }
-
-        .message-box {
-            background: #f8f9fa;
-            border-left: 5px solid #667eea;
-            padding: 20px;
-            margin: 30px 0;
-            text-align: left;
-            font-size: 1.1em;
-            color: #333;
-            border-radius: 8px;
-            line-height: 1.8;
-        }
-
-        .reasons {
-            margin: 30px 0;
-            text-align: left;
-        }
-
-        .reasons h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .reasons ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .reasons li {
-            padding: 10px 0;
-            font-size: 1.05em;
-            color: #555;
-            border-bottom: 1px solid #eee;
-        }
-
-        .reasons li:before {
-            content: "💕 ";
-            margin-right: 10px;
-        }
-
-        .button-container {
-            margin-top: 40px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        button {
-            padding: 15px 40px;
-            font-size: 1.1em;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        .btn-yes {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c);
             color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
         }
-
-        .btn-yes:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: #ff0000;
+            animation: float 6s infinite ease-in-out;
         }
-
-        .btn-no {
-            background: #ecf0f1;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .message {
+            font-size: 1.5em;
+            margin: 20px auto;
+            max-width: 600px;
+            background: rgba(255,255,255,0.8);
             color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
-
-        .btn-no:hover {
-            background: #bdc3c7;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #667eea;
-            pointer-events: none;
-        }
-
-        .date-info {
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
             margin-top: 20px;
-            font-size: 0.95em;
-            color: #7f8c8d;
-            font-style: italic;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+        #proposal {
+            display: none;
+            font-size: 2em;
+            color: #ff1493;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="heart">❤️</div>
-        
-        <h1>¿Quieres ser mi Valentín?</h1>
-        
-        <div class="greeting">
-            Hola <mark>Alison del Carmen Vallejos Quezada</mark>,
-        </div>
+    <!-- Corazones flotantes animados -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;">❤️</div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;">💖</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">❤️</div>
+    <div class="heart" style="left: 40%; animation-delay: 3s;">💖</div>
+    <div class="heart" style="left: 50%; animation-delay: 4s;">❤️</div>
+    <div class="heart" style="left: 60%; animation-delay: 5s;">💖</div>
+    <div class="heart" style="left: 70%; animation-delay: 6s;">❤️</div>
+    <div class="heart" style="left: 80%; animation-delay: 7s;">💖</div>
+    <div class="heart" style="left: 90%; animation-delay: 8s;">❤️</div>
 
-        <div class="message-box">
-            <mark>se que estamos pololeando, que levamos 7 meses pero aun asi queria pedirte que fueras mi san valentin y tambien se que no voy a tener plata para ese dia pero aun asi quiero pasar este hermoso dia contigo en especial siendo la primera con la quien paso esta fecha espero digas que si te amooo.</mark>
-        </div>
-
-        <div class="reasons">
-            <h3>Te amo porque:</h3>
-            <ul>
-                <li><mark>RAZÓN 1: a pesar de todo siempre quieres solucionar las coas</mark></li>
-                <li><mark>RAZÓN 2: tienes una hermosa sonrisa que ilumina mis dias</mark></li>
-                <li><mark>RAZÓN 3: por todo tus cariños y cosas lindas que me dices o haces </mark></li>
-                <li><mark>RAZÓN 4: eres tuuu</mark></li>
-            </ul>
-        </div>
-
-        <div class="message-box" style="border-left-color: #e74c3c; background: #ffe5e5;">
-            <strong style="color: #e74c3c;">Eres lo mejor que me ha pasado</strong> y quiero pasar todos los días de San Valentín contigo, y todos los otros días también. 💕
-        </div>
-
-        <div class="date-info">
-            🗓️ <mark>14 de febrero a las 17:30 hrs </mark>
-        </div>
-
-        <div class="button-container">
-            <button class="btn-yes" onclick="aceptacion()">¡Sí, quiero ser tu Valentín! ❤️</button>
-            <button class="btn-no" onclick="rechazo()">Ups, no</button>
-        </div>
+    <h1>¡Feliz San Valentín, [Nombre de tu novia]!</h1>
+    
+    <div class="message">
+        <p>Hola [Nombre de tu novia], hoy [Fecha], quiero compartir algo especial contigo.</p>
+        <p><strong>Paso 1:</strong> Recuerda nuestros momentos juntos, como [Recuerdo personalizado, ej. "nuestra primera cita"].</p>
+        <p><strong>Paso 2:</strong> Piensa en lo mucho que te quiero y en cómo haces mi vida mejor.</p>
+        <p><strong>Paso 3:</strong> Ahora, haz clic en el botón para ver mi propuesta.</p>
+        <button onclick="revealProposal()">Revelar Propuesta</button>
+        <p id="proposal">[Mensaje personalizado, ej. "Querida [Nombre de tu novia], ¿quieres ser mi San Valentín este año y todos los que vengan? Te amo, [Tu nombre]."]</p>
     </div>
 
     <script>
-        function aceptacion() {
-            alert('¡Eres increíble! Te amo 💕');
-            crearConfeti();
-        }
-
-        function rechazo() {
-            const btn = event.target;
-            btn.style.position = 'absolute';
-            btn.style.left = Math.random() * 80 + '%';
-            btn.style.top = Math.random() * 80 + '%';
-        }
-
-        function crearConfeti() {
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.background = ['#667eea', '#764ba2', '#e74c3c', '#f39c12'][Math.floor(Math.random() * 4)];
-                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 5000);
-            }
-
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    to {
-                        transform: translateY(100vh) rotate(360deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
+        function revealProposal() {
+            document.getElementById('proposal').style.display = 'block';
         }
     </script>
 </body>
