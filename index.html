@@ -3,88 +3,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz San Valentín</title>
+    <title>Mi Pregunta Especial ❤️</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c);
-            color: white;
-            text-align: center;
-            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
             overflow: hidden;
         }
+
+        /* Animación de corazones flotantes */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .heart-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .heart {
             position: absolute;
-            font-size: 2em;
-            color: #ff0000;
-            animation: float 6s infinite ease-in-out;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.3;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        h1 {
-            font-size: 3em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .message {
-            font-size: 1.5em;
-            margin: 20px auto;
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 600px;
-            background: rgba(255,255,255,0.8);
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1;
+            position: relative;
         }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .message {
+            quiero que sepas que eres la persona más especial en mi vida, por lo mismo te hago esto espero veas lo mucho que te amo y lo especial que eres para mi
+            color: #333;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin: 30px 0;
+            font-weight: 500;
+        }
+
+        .question {
+            ¿Quieres ser mi San Valentín? 💕
+            color: #e74c3c;
+            font-size: 1.8rem;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
         button {
-            background: #ff0000;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #yes-btn {
+            /* ===== CAMBIAR AQUÍ: Color del botón SÍ ===== */
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            min-width: 150px;
+        }
+
+        #yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        #no-btn {
+            /* ===== CAMBIAR AQUÍ: Color del botón NO ===== */
+            background: #95a5a6;
+            color: white;
+            min-width: 150px;
+            position: relative;
+        }
+
+        #no-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-box {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-box h2 {
+            sabia que ivas a decir que sí, pongase bella para ese dia
+            color: #e74c3c;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .success-box p {
+            color: #555;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #e74c3c;
+            pointer-events: none;
+            animation: confetti-fall 3s ease-out forwards;
+            z-index: 999;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .close-btn {
+            background: #95a5a6;
             color: white;
             border: none;
             padding: 10px 20px;
-            font-size: 1.2em;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             margin-top: 20px;
+            font-weight: bold;
         }
-        button:hover {
-            background: #cc0000;
+
+        .close-btn:hover {
+            background: #7f8c8d;
         }
-        #proposal {
-            display: none;
-            font-size: 2em;
-            color: #ff1493;
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+            }
+
+            .question {
+                font-size: 1.4rem;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 1rem;
+                min-width: 120px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Corazones flotantes animados -->
-    <div class="heart" style="left: 10%; animation-delay: 0s;">❤️</div>
-    <div class="heart" style="left: 20%; animation-delay: 1s;">💖</div>
-    <div class="heart" style="left: 30%; animation-delay: 2s;">❤️</div>
-    <div class="heart" style="left: 40%; animation-delay: 3s;">💖</div>
-    <div class="heart" style="left: 50%; animation-delay: 4s;">❤️</div>
-    <div class="heart" style="left: 60%; animation-delay: 5s;">💖</div>
-    <div class="heart" style="left: 70%; animation-delay: 6s;">❤️</div>
-    <div class="heart" style="left: 80%; animation-delay: 7s;">💖</div>
-    <div class="heart" style="left: 90%; animation-delay: 8s;">❤️</div>
+    <!-- Corazones de fondo -->
+    <div class="heart-background" id="heartBackground"></div>
 
-    <h1>¡Feliz San Valentín, [Nombre de tu novia]!</h1>
-    
-    <div class="message">
-        <p>Hola [Nombre de tu novia], hoy [Fecha], quiero compartir algo especial contigo.</p>
-        <p><strong>Paso 1:</strong> Recuerda nuestros momentos juntos, como [Recuerdo personalizado, ej. "nuestra primera cita"].</p>
-        <p><strong>Paso 2:</strong> Piensa en lo mucho que te quiero y en cómo haces mi vida mejor.</p>
-        <p><strong>Paso 3:</strong> Ahora, haz clic en el botón para ver mi propuesta.</p>
-        <button onclick="revealProposal()">Revelar Propuesta</button>
-        <p id="proposal">[Mensaje personalizado, ej. "Querida [Nombre de tu novia], ¿quieres ser mi San Valentín este año y todos los que vengan? Te amo, [Tu nombre]."]</p>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>❤️ Una Pregunta Especial ❤️</h1>
+        
+        <div class="message">
+            <!-- ===== CAMBIAR AQUÍ: Escribe el mensaje personalizado para tu novia ===== -->
+            Desde el primer momento en que te vi, mi corazón supo que eras especial.
+            Cada momento contigo es un regalo increíble, cada risa tuya me hace más feliz.
+            <br><br>
+            Eres la persona más hermosa, no solo por fuera, sino por la maravillosa que eres por dentro.
+        </div>
+
+        <div class="question">
+            <!-- ===== CAMBIAR AQUÍ: La pregunta principal ===== -->
+            ¿Quieres ser mi San Valentín? 💕
+        </div>
+
+        <div class="buttons-container">
+            <button id="yes-btn">Sí ❤️</button>
+            <button id="no-btn">No</button>
+        </div>
+    </div>
+
+    <!-- Mensaje de éxito -->
+    <div class="success-message" id="successMessage">
+        <div class="success-box">
+            <!-- ===== CAMBIAR AQUÍ: Mensaje cuando ella dice SÍ ===== -->
+            <h2>¡Eres la Mejor! 🎉</h2>
+            <p>Acabas de hacer el hombre más feliz del mundo ❤️</p>
+            <p>Te amo mucho, mi San Valentín especial 💕</p>
+            <button class="close-btn" onclick="location.reload()">Cerrar</button>
+        </div>
     </div>
 
     <script>
-        function revealProposal() {
-            document.getElementById('proposal').style.display = 'block';
+        // Crear corazones flotantes en el fondo
+        function createHearts() {
+            const heartBg = document.getElementById('heartBackground');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+                heartBg.appendChild(heart);
+            }
         }
+
+        // Crear confeti
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.background = ['#e74c3c', '#f39c12', '#e91e63', '#9c27b0'][Math.floor(Math.random() * 4)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Botón SÍ
+        document.getElementById('yes-btn').addEventListener('click', function() {
+            createConfetti();
+            document.getElementById('successMessage').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Botón NO - Se escapa del cursor
+        const noBtn = document.getElementById('no-btn');
+        
+        noBtn.addEventListener('mouseover', function() {
+            const randomX = Math.random() * (window.innerWidth - 150);
+            const randomY = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        // También se escapa si intenta hacer clic con el teclado
+        noBtn.addEventListener('focus', function() {
+            const randomX = Math.random() * (window.innerWidth - 150);
+            const randomY = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        // Inicializar
+        createHearts();
     </script>
 </body>
 </html>
+
