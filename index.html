@@ -1,194 +1,239 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>💖 San Valentín 💖</title>
+<meta charset="UTF-8">
+<title>San Valentín 💌</title>
 
-  <!-- =====================
-       COSAS QUE PODÉS CAMBIAR
-       ===================== -->
-  <!-- 1️⃣ Cambiá el nombre de tu novia -->
-  <!-- 2️⃣ Cambiá la fecha -->
-  <!-- 3️⃣ Cambiá los textos románticos -->
+<!-- =====================
+     COSAS QUE PODÉS CAMBIAR
+     =====================
+     1️⃣ Nombre de tu novia
+     2️⃣ Fecha
+     3️⃣ Textos románticos
+-->
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f8cdda, #fbd3e9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
 
-    .card {
-      background: white;
-      border-radius: 25px;
-      padding: 30px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      animation: aparecer 1.5s ease;
-      position: relative;
-    }
+  .container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
 
-    @keyframes aparecer {
-      from {
-        transform: scale(0.7);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
+  /* ===== SOBRE ===== */
+  .envelope {
+    width: 260px;
+    height: 170px;
+    margin: auto;
+    background: #fff;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.4s ease;
+  }
 
-    h1 {
-      color: #ff4d6d;
-      margin-bottom: 10px;
-      animation: latido 1.5s infinite;
-    }
+  .envelope:hover {
+    transform: scale(1.03);
+  }
 
-    @keyframes latido {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
+  .envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff6b81;
+    clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+    border-radius: 12px;
+  }
 
-    p {
-      color: #444;
-      font-size: 1.1em;
-    }
+  .envelope span {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
 
-    .buttons {
-      margin-top: 25px;
-      position: relative;
-      height: 120px;
-    }
+  /* ===== CARTA ===== */
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    animation: fadeIn 1s ease;
+  }
 
-    button {
-      padding: 12px 25px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.2s;
-      position: absolute;
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    #yesBtn {
-      background-color: #ff4d6d;
-      color: white;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  h1 {
+    color: #ff6b81;
+    font-weight: 600;
+  }
 
-    #yesBtn:hover {
-      transform: translateX(-50%) scale(1.1);
-    }
+  p {
+    color: #555;
+    font-size: 1.05em;
+    line-height: 1.5;
+  }
 
-    #noBtn {
-      background-color: #ccc;
-      color: #333;
-      top: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  .buttons {
+    margin-top: 30px;
+    position: relative;
+    height: 90px;
+  }
 
-    .heart {
-      position: absolute;
-      color: #ff4d6d;
-      font-size: 20px;
-      animation: flotar 6s linear infinite;
-      opacity: 0.8;
-    }
+  button {
+    padding: 12px 28px;
+    font-size: 1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+  }
 
-    @keyframes flotar {
-      from {
-        transform: translateY(100vh) scale(1);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-10vh) scale(1.5);
-        opacity: 0;
-      }
-    }
-  </style>
+  #yesBtn {
+    background: #ff6b81;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #yesBtn:hover {
+    background: #ff4f68;
+  }
+
+  #noBtn {
+    background: #ddd;
+    color: #555;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* corazones suaves */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 18px;
+    opacity: 0.5;
+    animation: floatUp 8s linear infinite;
+  }
+
+  @keyframes floatUp {
+    from { transform: translateY(0); opacity: 0.5; }
+    to { transform: translateY(-120vh); opacity: 0; }
+  }
+</style>
 </head>
+
 <body>
 
-  <div class="card">
-    <!-- 💕 CAMBIÁ EL NOMBRE ACÁ -->
-    <h1>💘 Mi amor 💘</h1>
+<div class="container">
 
-    <!-- 💕 CAMBIÁ EL TEXTO -->
-    <p>
-      Desde que llegaste a mi vida todo es más lindo,  
-      más divertido y más especial 🥰
-    </p>
-
-    <p>
-      <!-- 💕 CAMBIÁ LA FECHA -->
-      Este <strong>14 de febrero</strong> quiero preguntarte algo muy importante...
-    </p>
-
-    <h2 style="color:#ff4d6d;">¿Querés ser mi San Valentín? 💖</h2>
-
-    <div class="buttons">
-      <button id="yesBtn" onclick="aceptar()">Sí 💕</button>
-      <button id="noBtn" onmouseover="moverBoton()">No 💔</button>
+  <!-- ✉️ INTRODUCCIÓN -->
+  <div id="intro">
+    <div class="envelope" onclick="abrirCarta()">
+      <span>Ábreme 💌</span>
     </div>
   </div>
 
-  <script>
-    function aceptar() {
-      document.body.innerHTML = `
-        <div style="
-          display:flex;
-          flex-direction:column;
-          justify-content:center;
-          align-items:center;
-          height:100vh;
-          background:linear-gradient(135deg, #ff9a9e, #fad0c4);
-          font-family:'Comic Sans MS', cursive;
-          text-align:center;
-        ">
-          <h1 style="color:#ff4d6d;">💖 SABÍA QUE IBAS A DECIR QUE SÍ 💖</h1>
-          <p style="font-size:1.3em;">Te amo mucho 🥹💘</p>
-        </div>
-      `;
-    }
+  <!-- 💖 CARTA -->
+  <div id="carta" class="hidden card">
 
-    function moverBoton() {
-      const btn = document.getElementById("noBtn");
-      const x = Math.random() * 250 - 125;
-      const y = Math.random() * 100 - 50;
+    <!-- 📝 CAMBIÁ EL NOMBRE -->
+    <h1>Para ti, mi amor 💖</h1>
 
-      btn.style.transform = `translate(${x}px, ${y}px)`;
-    }
+    <!-- 📝 CAMBIÁ EL TEXTO -->
+    <p>
+      Hay personas que llegan a la vida y la vuelven más bonita  
+      sin darse cuenta. Tú eres una de ellas.
+    </p>
 
-    // Corazones flotando
-    function crearCorazon() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-      document.body.appendChild(heart);
+    <p>
+      <!-- 📝 CAMBIÁ LA FECHA -->
+      Este <strong>14 de febrero</strong>, quiero preguntarte algo especial…
+    </p>
 
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }
+    <h2 style="color:#ff6b81;">¿Quieres ser mi San Valentín? 💕</h2>
 
-    setInterval(crearCorazon, 500);
-  </script>
+    <div class="buttons">
+      <button id="yesBtn" onclick="aceptar()">Sí 💖</button>
+      <button id="noBtn" onmouseover="moverBoton()">No</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function abrirCarta() {
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("carta").classList.remove("hidden");
+  }
+
+  function aceptar() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#f8cdda,#fbd3e9);
+        font-family:'Segoe UI',sans-serif;
+        text-align:center;
+      ">
+        <h1 style="color:#ff6b81;">Gracias por decir que sí 💖</h1>
+        <p style="font-size:1.2em;color:#555;">Prometo hacerte muy feliz ✨</p>
+      </div>
+    `;
+  }
+
+  function moverBoton() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random() * 60 - 30;
+    const y = Math.random() * 30 - 15;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+
+  // Corazones sutiles
+  function crearCorazon() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 8000);
+  }
+
+  setInterval(crearCorazon, 1200);
+</script>
 
 </body>
 </html>
+
 
 
 
