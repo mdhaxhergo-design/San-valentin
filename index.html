@@ -155,7 +155,7 @@
         El <strong>14 de febrero y el 15 de febrero</strong> te voy a llevar a unas sorpresas en talcaa ✨
       </p>
 
-     <img id="imagen" src="foto/foto1.jpg">
+     <img id="imagen" src="fotos/foto1.jpg">
     </div>
 
   </div> <!-- cierre card -->
@@ -170,13 +170,15 @@
   const buttons = document.getElementById("buttons");
   const photo = document.getElementById("photo");
 
-  const fotos = [
-    "fotos/foto1.jpg",
-    "fotos/foto2.jpg",
-    "fotos/foto3.jpg",
-    "fotos/foto4.jpg",
-    "fotos/foto5.jpg"
-  ];
+  const photo = document.getElementById("photo");
+
+const images = [
+  "fotos/foto1.jpg",
+  "fotos/foto2.jpg",
+  "fotos/foto3.jpg",
+  "fotos/foto4.jpg",
+  "fotos/foto5.jpg"
+];
 
   let imgIndex = 0;
   let noScale = 1;
@@ -217,10 +219,9 @@
   }
 
   function cambiarImagenes() {
-    setInterval(() => {
-      imgIndex = (imgIndex + 1) % images.length;
-      photo.src = images[imgIndex];
-    }, 2500);
-  }
-</script>
+  setInterval(() => {
+    imgIndex = (imgIndex + 1) % images.length;
+    photo.src = images[imgIndex];
+  }, 2500);
+}
 
